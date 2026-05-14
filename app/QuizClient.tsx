@@ -83,7 +83,7 @@ export default function QuizClient() {
     const state = finalPersona === 'SHT' ? (shtPhase === 2 ? 'final' : shtPhase === 1 ? 'mid' : 'base') : (isUnlocked || isForUnlock ? 'awakened' : 'base');
     const title = (isUnlocked || isForUnlock) ? pData.awakened.title : pData.rot.title;
     
-    const shareUrl = `https://brainrottest.xyz/?share=${finalPersona}_${state}`;
+    const shareUrl = `https://brain-rot-test-cyan.vercel.app/?share=${finalPersona}_${state}`;
     const shareText = `🧠 BRAIN ROT TERMINAL\nMy hidden genius is ${finalPersona} - ${title}!\nDecode your DNA:`;
 
     if (platform === 'X') window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`, '_blank');
