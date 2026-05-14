@@ -1,10 +1,14 @@
-// 路径: app/layout.tsx
-import './globals.css';
-import { Analytics } from "@vercel/analytics/react"; // <-- 引入 Vercel 监控探头
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
+import './globals.css'
+import { Analytics } from "@vercel/analytics/react"
 
-export const metadata = {
-  title: 'Brain Rot Terminal',
-  description: 'Unleash your brain rot genius. Discover your digital DNA.',
+// 引入高级无衬线字体，恢复赛博现代感
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata: Metadata = {
+  title: 'Brain Rot Test - Your ultimate brain rot is your unawakened genius',
+  description: 'Decode your digital DNA. What is your hidden genius?',
 }
 
 export default function RootLayout({
@@ -14,9 +18,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="hide-scrollbar">
-      <body className="bg-[#1a1814] text-[#e5e5e5] antialiased">
+      {/* 注入 Inter 字体，恢复网页的顶级排版质感 */}
+      <body className={`${inter.className} bg-[#1a1814] text-[#e5e5e5] antialiased selection:bg-[#ccff00] selection:text-black min-h-screen flex flex-col`}>
         {children}
-        {/* 将监控探头埋入全局的 body 中 */}
         <Analytics />
       </body>
     </html>
