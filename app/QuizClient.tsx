@@ -77,9 +77,9 @@ export default function QuizClient() {
     const state = finalPersona === 'SHT' ? (shtPhase === 2 ? 'final' : shtPhase === 1 ? 'mid' : 'base') : (isUnlocked || isForUnlock ? 'awakened' : 'base');
     const title = (isUnlocked || isForUnlock) ? pData.awakened.title : pData.rot.title;
     
-    // 你的专属 Vercel 分配域名
+    // 你的专属 Vercel Cyan 域名
     const shareUrl = `https://brain-rot-test-cyan.vercel.app/?share=${finalPersona}_${state}`;
-    // 文本优化：将 "BRAIN ROT TERMINAL" 修改为 "BRAIN ROT TEST"
+    // 优化：将文字修改为 "BRAIN ROT TEST"
     const shareText = `🧠 BRAIN ROT TEST\nI'm ${finalPersona}! My hidden genius is ${title}!\nDecode your DNA:`;
     // 用于手机端 IG/TK 的纯文本复制，优化体验
     const pureCopyText = `I'm ${finalPersona}! My hidden genius is ${title}!\n\n${shareUrl}`;
@@ -107,16 +107,23 @@ export default function QuizClient() {
 
   return (
     <main className="relative w-screen h-screen flex flex-col justify-center items-center overflow-hidden bg-[#1a1814] text-[#e5e5e5]">
+      {/* 恢复丢失的 CSS 动画 keyframes 和 glitch 特效 */}
       <style>{`
         @keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         @keyframes scrollRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+        @keyframes decodeFlash { 0% { opacity: 0; background: rgba(255,255,255,0); } 30% { opacity: 1; background: #ccff00; } 100% { opacity: 0; background: rgba(255,255,255,0); } }
         @keyframes neonPulse { 0%, 100% { filter: brightness(1.2) drop-shadow(0 0 10px rgba(255,255,255,0.4)); } 50% { filter: brightness(1.5) drop-shadow(0 0 25px rgba(255,255,255,0.7)); } }
         .animate-scroll-left { animation: scrollLeft 40s linear infinite; }
         .animate-scroll-right { animation: scrollRight 40s linear infinite; }
-        .animate-violent-shake { animation: violentShake 0.12s infinite; filter: brightness(1.3); }
         .animate-neon-pulse { animation: neonPulse 1.2s infinite ease-in-out; }
+        .animate-violent-shake { animation: violentShake 0.12s infinite; filter: brightness(1.3); }
         @keyframes violentShake { 0%, 100% { transform: translate(0,0); } 25% { transform: translate(-4px,4px); } 75% { transform: translate(4px,-4px); } }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .heavy-glitch-overlay { background: repeating-linear-gradient(0deg, rgba(255,0,0,0.1), rgba(255,0,0,0.1) 1px, transparent 1px, transparent 2px); pointer-events: none; }
       `}</style>
+
+      {/* 故障蒙层：恢复丢失的动画实现核心代码 */}
+      {isGlitching && <div className="absolute inset-0 z-[200] heavy-glitch-overlay opacity-90 animate-violent-shake" />}
 
       {/* 背景滚动弹幕 */}
       <div className="absolute inset-0 z-0 flex flex-col justify-evenly opacity-10 rotate-[-3deg] scale-125 pointer-events-none">
@@ -145,7 +152,7 @@ export default function QuizClient() {
                 <h2 className="text-3xl md:text-5xl font-bold text-white mb-10 leading-tight">{questions[currentStep].text}</h2>
                 <div className="grid gap-4">
                   {questions[currentStep].options.map(opt => (
-                    <button key={opt.id} onClick={() => handleAnswer(opt)} className="group flex text-left border-[3px] border-black p-4 bg-[#1a1814] hover:bg-[#ccff00] hover:text-black transition-all">
+                    <button key={opt.id} onClick={() => handleAnswer(opt)} className="group flex text-left border-[3px] border-black p-4 bg-[#1a1814] hover:bg-[#ccff00] hover:text-black transition-all shadow-[4px_4px_0_0_rgba(0,0,0,1)]">
                       <span className="font-mono mr-4 font-black text-[#ccff00] group-hover:text-black">[{opt.id}]</span>
                       <span className="text-xl font-bold leading-tight">{opt.text}</span>
                     </button>
@@ -157,30 +164,30 @@ export default function QuizClient() {
         )}
 
         {currentStep === 13 && currentPersona && (
-          <div className="fixed inset-0 z-50 flex flex-col justify-center items-center p-4 pt-16 md:pt-4">
+          <div className="fixed inset-0 z-50 flex flex-col justify-center items-center p-4 pt-16 md:pt-4 overflow-y-auto hide-scrollbar">
             <div className={`w-full max-w-6xl relative z-20 ${isDecoding ? 'animate-violent-shake' : ''}`}>
-              <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="border-4 p-8 md:p-12 flex flex-col md:flex-row gap-8 bg-black transition-colors" style={{ borderColor: currentBorderColor, backgroundColor: isShtFinal ? '#1c1810' : '#000000' }}>
+              <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="border-4 p-8 md:p-12 flex flex-col md:flex-row gap-8 bg-black transition-colors" style={{ borderColor: currentBorderColor, backgroundColor: isShtFinal ? '#1c1810' : '#000000', boxShadow: `10px 10px 0px 0px ${isUnlocked ? currentPersona?.colorHex+'40' : 'rgba(0,0,0,0.5)'}` }}>
                 
                 {/* 支付墙 */}
                 {((!isUnlocked && isAwakened && finalPersona !== 'SHT') || (finalPersona === 'SHT' && shtPhase === 1 && isAwakened)) && !isDecoding && (
                   <div className="absolute inset-0 z-30 bg-black/60 backdrop-blur-xl flex items-center justify-center p-4">
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white p-8 border-4 border-black shadow-[12px_12px_0_0_rgba(0,0,0,1)] text-black text-center max-w-sm">
-                      <h3 className="text-2xl font-black mb-6">AWAKEN FORM</h3>
+                      <h3 className="text-2xl font-black mb-6 uppercase">AWAKEN FORM</h3>
                       {isVerifying ? (
-                        <p className="font-bold p-4 bg-black text-[#ccff00] animate-pulse">Syncing Signals...</p>
+                        <p className="font-bold p-4 bg-black text-[#ccff00] animate-pulse border-2 border-black">Syncing Signals...</p>
                       ) : (
                         <>
                           <button onClick={handleUnlockTransition} className="w-full bg-black text-[#ccff00] font-black py-4 mb-4 border-2 border-black hover:bg-[#ccff00] hover:text-black transition-all">Unlock Elite Card ($1)</button>
                           {freeShareUsed ? (
                             <p className="text-red-600 text-xs font-bold uppercase border-2 border-red-600 p-2 bg-red-50">Share used on this device</p>
                           ) : (
-                            <div className="grid gap-2 grid-cols-2 mt-4">
-                              <button onClick={() => handlePlatformShare('X', true)} className="flex items-center justify-center gap-2 bg-black text-white py-2 border-2 border-black hover:bg-[#ccff00] hover:text-black"><SocialIcon type="X" /><span className="text-xs font-black">X</span></button>
-                              <button onClick={() => handlePlatformShare('FB', true)} className="flex items-center justify-center gap-2 bg-black text-white py-2 border-2 border-black hover:bg-[#ccff00] hover:text-black"><SocialIcon type="FB" /><span className="text-xs font-black">FB</span></button>
-                              <button onClick={() => handlePlatformShare('REDDIT', true)} className="flex items-center justify-center gap-2 bg-black text-white py-2 border-2 border-black hover:bg-[#ccff00] hover:text-black"><SocialIcon type="REDDIT" /><span className="text-xs font-black">Reddit</span></button>
-                              <button onClick={() => handlePlatformShare('IG', true)} className="flex items-center justify-center gap-2 bg-black text-white py-2 border-2 border-black hover:bg-[#ccff00] hover:text-black"><SocialIcon type="IG" /><span className="text-xs font-black">IG</span></button>
-                              <button onClick={() => handlePlatformShare('TK', true)} className="flex items-center justify-center gap-2 bg-black text-white py-2 border-2 border-black hover:bg-[#ccff00] hover:text-black"><SocialIcon type="TK" /><span className="text-xs font-black">TK</span></button>
-                              <button onClick={() => handlePlatformShare('COPY', true)} className="flex items-center justify-center gap-2 bg-black text-white py-2 border-2 border-black hover:bg-[#ccff00] hover:text-black"><SocialIcon type="COPY" /><span className="text-[10px] font-black">Copy</span></button>
+                            <div className="grid gap-2 grid-cols-2 mt-4 border-t-2 border-gray-200 pt-4">
+                              <button onClick={() => handlePlatformShare('X', true)} className="flex items-center justify-center gap-2 bg-black text-white py-2 border-2 border-black hover:bg-[#ccff00] hover:text-black transition-colors"><SocialIcon type="X" /><span className="text-xs font-black">X</span></button>
+                              <button onClick={() => handlePlatformShare('FB', true)} className="flex items-center justify-center gap-2 bg-black text-white py-2 border-2 border-black hover:bg-[#ccff00] hover:text-black transition-colors"><SocialIcon type="FB" /><span className="text-xs font-black">FB</span></button>
+                              <button onClick={() => handlePlatformShare('REDDIT', true)} className="flex items-center justify-center gap-2 bg-black text-white py-2 border-2 border-black hover:bg-[#ccff00] hover:text-black transition-colors"><SocialIcon type="REDDIT" /><span className="text-xs font-black">Reddit</span></button>
+                              <button onClick={() => handlePlatformShare('IG', true)} className="flex items-center justify-center gap-2 bg-black text-white py-2 border-2 border-black hover:bg-[#ccff00] hover:text-black transition-colors"><SocialIcon type="IG" /><span className="text-xs font-black">IG</span></button>
+                              <button onClick={() => handlePlatformShare('TK', true)} className="flex items-center justify-center gap-2 bg-black text-white py-2 border-2 border-black hover:bg-[#ccff00] hover:text-black transition-colors"><SocialIcon type="TK" /><span className="text-xs font-black">TK</span></button>
+                              <button onClick={() => handlePlatformShare('COPY', true)} className="flex items-center justify-center gap-2 bg-[#111] text-white py-2 border-2 border-black hover:bg-[#ccff00] hover:text-black transition-colors"><SocialIcon type="COPY" /><span className="text-[10px] font-black">Copy</span></button>
                             </div>
                           )}
                         </>
@@ -192,7 +199,7 @@ export default function QuizClient() {
                 {/* 卡片左侧：立绘 */}
                 <div className="w-full md:w-5/12 flex flex-col items-center">
                   <div className="w-full mb-2 flex justify-between font-black uppercase text-[10px] tracking-widest"><div className="bg-black text-white px-2 py-1 border-2" style={{ borderColor: currentBorderColor }}>{finalPersona === 'SHT' ? '★ SECRET RARE ★' : `DIAGNOSIS // ${persona}`}</div></div>
-                  <div className="w-full aspect-[4/5] bg-white border-4 border-black p-2 mb-4">
+                  <div className="w-full aspect-[4/5] bg-white border-4 border-black p-2 mb-4 shadow-[4px_4px_0_0_rgba(0,0,0,0.5)]">
                     <img src={finalPersona === 'SHT' ? (shtPhase === 2 ? currentPersona.imageAwakened : shtPhase === 1 ? currentPersona.imageMid : currentPersona.imageBase) : (isUnlocked ? currentPersona.imageAwakened : currentPersona.imageBase)} className={`w-full h-full object-contain transition-all duration-1000 ${isAwakened && !isUnlocked && !isDecoding ? 'blur-lg grayscale' : ''}`} />
                   </div>
                 </div>
@@ -200,26 +207,27 @@ export default function QuizClient() {
                 {/* 卡片右侧：内容 */}
                 <div className="w-full md:w-7/12 flex flex-col justify-center text-white h-full">
                   <h1 className={`text-6xl md:text-8xl font-black uppercase mb-4 transition-all ${isUnlocked || isShtFinal ? 'animate-neon-pulse' : ''}`} style={{ textShadow: isUnlocked || isShtFinal ? `0 0 10px white, 0 0 20px ${currentPersona.colorHex}` : 'none' }}>{isUnlocked ? currentPersona.awakened.title : currentPersona.rot.title}</h1>
-                  <h2 className="inline-block text-xl md:text-3xl font-black uppercase px-3 py-1.5 border-2 border-black transform -skew-x-6 mb-6 w-fit shadow-[4px_4px_0_0_rgba(0,0,0,1)]" style={{ backgroundColor: isUnlocked ? currentPersona.colorHex : '#222', color: isUnlocked ? 'black' : 'white' }}>"{currentPersona.slogan}"</h2>
-                  <div className={`p-4 border-2 border-black mb-6 shadow-[4px_4px_0_0_rgba(0,0,0,1)] ${isShtFinal ? 'bg-[#fff9e6]' : isUnlocked ? 'bg-white' : 'bg-[#111]'}`}><p className={`text-base md:text-xl font-bold ${isUnlocked || isShtFinal ? 'text-black' : 'text-white'}`}>{isUnlocked ? currentPersona.awakened.description : currentPersona.rot.description}</p></div>
+                  <h2 className="inline-block text-xl md:text-3xl font-black uppercase px-3 py-1.5 border-2 border-black transform -skew-x-6 mb-6 w-fit shadow-[6px_6px_0_0_rgba(0,0,0,1)]" style={{ backgroundColor: isUnlocked ? currentPersona.colorHex : '#222', color: isUnlocked ? 'black' : 'white' }}>"{currentPersona.slogan}"</h2>
+                  <div className={`p-4 p-5 border-2 border-black mb-6 shadow-[6px_6px_0_0_rgba(0,0,0,1)] ${isShtFinal ? 'bg-[#fff9e6]' : isUnlocked ? 'bg-white' : 'bg-[#111]'}`}><p className={`text-base md:text-2xl font-bold leading-snug ${isUnlocked || isShtFinal ? 'text-black' : 'text-white'}`}>{isUnlocked ? currentPersona.awakened.description : currentPersona.rot.description}</p></div>
                   {isUnlocked && (
-                    <div className="mb-6"><h3 className="font-mono font-bold text-xs uppercase px-2 py-1 border-2 border-black" style={{ backgroundColor: isShtFinal ? '#D69E2E' : currentPersona.colorHex, color: 'black' }}>// ELITE ACTION GUIDES</h3><ul className="space-y-1 text-sm font-black p-4 border-2 border-black bg-white text-black mt-2">{currentPersona.guides.map((g, i) => <li key={i}>{g}</li>)}</ul></div>
+                    <div className="mb-6"><h3 className="font-mono font-bold text-xs uppercase px-2 py-1 border-2 border-black" style={{ backgroundColor: isShtFinal ? '#D69E2E' : currentPersona.colorHex, color: 'black' }}>// ELITE ACTION GUIDES</h3><ul className="space-y-1.5 text-sm font-black p-4 border-2 border-black bg-white text-black mt-2 shadow-[4px_4px_0_0_rgba(0,0,0,1)]">{currentPersona.guides.map((g, i) => <li key={i}>{g}</li>)}</ul></div>
                   )}
                   
                   {isUnlocked && (
-                    <div className="mt-auto flex flex-col gap-4">
+                    <div className="mt-auto flex flex-col gap-4 border-t-2 border-white/10 pt-6 relative">
+                       <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black px-4 font-black uppercase text-white/50 text-xs tracking-widest">- SHARE RESULT -</div>
                       {!showPostMenu ? (
-                        <button onClick={() => setShowPostMenu(true)} className="w-full border-4 border-black text-black font-black py-4 px-6 uppercase text-lg md:text-xl hover:bg-white transition-all shadow-[6px_6px_0_0_rgba(0,0,0,1)]" style={{ backgroundColor: isShtFinal ? '#D69E2E' : currentPersona.colorHex }}>
+                        <button onClick={() => setShowPostMenu(true)} className="w-full border-4 border-black text-black font-black py-4 px-6 uppercase text-lg md:text-2xl hover:bg-white transition-all shadow-[8px_8px_0_0_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0_0_rgba(0,0,0,1)]" style={{ backgroundColor: isShtFinal ? '#D69E2E' : currentPersona.colorHex }}>
                           SHARE RESULT ↗
                         </button>
                       ) : (
-                        <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
-                          <button onClick={() => handlePlatformShare('X', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2 border-2 border-black hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="X" /><span className="text-[10px] md:text-xs">X</span></button>
-                          <button onClick={() => handlePlatformShare('FB', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2 border-2 border-black hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="FB" /><span className="text-[10px] md:text-xs">FB</span></button>
-                          <button onClick={() => handlePlatformShare('REDDIT', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2 border-2 border-black hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="REDDIT" /><span className="text-[9px] md:text-[10px]">Reddit</span></button>
-                          <button onClick={() => handlePlatformShare('IG', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2 border-2 border-black hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="IG" /><span className="text-[10px] md:text-xs">IG</span></button>
-                          <button onClick={() => handlePlatformShare('TK', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2 border-2 border-black hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="TK" /><span className="text-[10px] md:text-xs">TK</span></button>
-                          <button onClick={() => handlePlatformShare('COPY', false)} className="flex items-center justify-center gap-1.5 text-black font-bold py-2 border-2 border-black hover:bg-white transition-colors flex-1" style={{ backgroundColor: isShtFinal ? '#D69E2E' : currentPersona.colorHex }}><SocialIcon type="COPY" /><span className="text-[10px] md:text-xs">Copy</span></button>
+                        <div className="grid grid-cols-3 md:grid-cols-6 gap-2 border-2 border-black bg-[#1a1814] p-2 shadow-[6px_6px_0_0_rgba(0,0,0,1)]">
+                          <button onClick={() => handlePlatformShare('X', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2.5 border-2 border-white/20 hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="X" /><span className="text-[10px] md:text-xs">X</span></button>
+                          <button onClick={() => handlePlatformShare('FB', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2.5 border-2 border-white/20 hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="FB" /><span className="text-[10px] md:text-xs">FB</span></button>
+                          <button onClick={() => handlePlatformShare('REDDIT', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2.5 border-2 border-white/20 hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="REDDIT" /><span className="text-[9px] md:text-[10px]">Reddit</span></button>
+                          <button onClick={() => handlePlatformShare('IG', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2.5 border-2 border-white/20 hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="IG" /><span className="text-[10px] md:text-xs">IG</span></button>
+                          <button onClick={() => handlePlatformShare('TK', false) } className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2.5 border-2 border-white/20 hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="TK" /><span className="text-[10px] md:text-xs">TK</span></button>
+                          <button onClick={() => handlePlatformShare('COPY', false)} className="flex items-center justify-center gap-1.5 text-black font-bold py-2.5 border-2 border-black hover:bg-white transition-colors flex-1" style={{ backgroundColor: isShtFinal ? '#D69E2E' : currentPersona.colorHex }}><SocialIcon type="COPY" /><span className="text-[10px] md:text-xs">Copy</span></button>
                         </div>
                       ) }
                     </div>
@@ -228,19 +236,19 @@ export default function QuizClient() {
               </motion.div>
 
               {isUnlocked && (
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 1 } }} className="mt-6 p-4 border-[3px] border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)] bg-[#ccff00] text-black flex items-center justify-between gap-4">
-                   <div><h3 className="font-black text-xl mb-1 uppercase">Fuel the Developer ☕</h3><p className="font-mono text-xs font-bold opacity-80 leading-relaxed">为开发者加油☕制作这个想法耗费了我大量的咖啡因。要不要请我喝杯咖啡？</p></div>
-                   <a href="https://buymeacoffee.com/kamhowardoops" target="_blank" className="bg-black text-[#ccff00] px-6 py-3 font-black uppercase text-sm border-2 border-black whitespace-nowrap shadow-[4px_4px_0_0_rgba(0,0,0,0.5)] hover:bg-white hover:text-black">Support Dev ↗</a>
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0, transition: { delay: 1 } }} className="mt-8 p-6 border-[3px] border-black shadow-[6px_6px_0_0_rgba(0,0,0,1)] bg-[#ccff00] text-black flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+                   <div className="text-center md:text-left"><h3 className="font-black text-xl mb-1 uppercase">Fuel the Developer ☕</h3><p className="font-mono text-xs font-bold opacity-80 leading-relaxed">为开发者加油☕制作这个想法耗费了我大量的咖啡因。要不要请我喝杯咖啡？</p></div>
+                   <a href="https://buymeacoffee.com/kamhowardoops" target="_blank" className="bg-black text-[#ccff00] px-6 py-3 font-black uppercase text-base border-2 border-black whitespace-nowrap shadow-[4px_4px_0_0_rgba(0,0,0,0.5)] hover:bg-white hover:text-black hover:translate-y-1 hover:shadow-[2px_2px_0_0_rgba(0,0,0,0.5)] transition-all">Support Dev ↗</a>
                 </motion.div>
               )}
             </div>
             
-            <div className="mt-8 relative z-20">
+            <div className="mt-8 relative z-20 pb-16">
               {finalPersona === 'SHT' ? (
                 shtPhase === 0 ? <button onClick={handleShtMidTransition} className="bg-red-600 text-white font-black px-12 py-5 shadow-[6px_6px_0_0_rgba(255,0,0,0.4)] transition-all uppercase hover:bg-black hover:text-red-600 hover:translate-y-1">DECODE THIS MESS</button> 
-                : (shtPhase === 1 && !isAwakened) ? <button onClick={() => setIsAwakened(true)} className="bg-white text-red-600 border-4 border-red-600 font-black px-12 py-5 uppercase hover:bg-red-600 hover:text-white transition-all shadow-[6px_6px_0_0_rgba(255,255,255,0.2)]">Actually, I have value.</button> 
+                : (shtPhase === 1 && !isAwakened) ? <button onClick={() => setIsAwakened(true)} className="bg-white text-red-600 border-4 border-red-600 font-black px-12 py-5 uppercase hover:bg-red-600 hover:text-white transition-all shadow-[6px_6px_0_0_rgba(255,255,255,0.2)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0_0_rgba(255,255,255,0.2)]">Actually, I have value.</button> 
                 : null
-              ) : (!isAwakened && <button onClick={() => setIsAwakened(true)} className="bg-[#ccff00] border-4 border-black text-black font-black px-12 py-5 shadow-[6px_6px_0_0_rgba(255,255,255,0.2)] hover:bg-white hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0_0_rgba(255,255,255,0.2)] transition-all uppercase">Decode My Brain Rot</button>)}
+              ) : (!isAwakened && <button onClick={() => setIsAwakened(true)} className="bg-[#ccff00] border-4 border-black text-black font-black px-12 py-5 shadow-[6px_6px_0_0_rgba(255,255,255,0.2)] hover:bg-white hover:translate-x-1 hover:translate-y-1 hover:shadow-[2px_2px_0_0_rgba(255,255,255,0.2)] transition-all uppercase text-xl">Decode My Brain Rot</button>)}
             </div>
           </div>
         )}
