@@ -2,23 +2,23 @@
 import { Metadata } from 'next';
 import QuizClient from './QuizClient';
 
-// 强制动态渲染，防止 Vercel 尝试静态生成导致路径丢失
+// 终极武器：强制动态渲染，解决 Vercel 路由不匹配导致的 404
 export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(props: { 
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }> 
+  searchParams: Promise<{ share?: string }> 
 }): Promise<Metadata> {
   const searchParams = await props.searchParams;
-  const share = searchParams.share as string | undefined;
+  const share = searchParams.share; 
   
-  let ogImageUrl = '/api/og'; 
-  if (share) {
-    const [persona, state] = share.split('_');
-    ogImageUrl = `/api/og?persona=${persona}&state=${state}`;
-  }
+  // 这里的路径直接指向你的 API
+  const ogImageUrl = share 
+    ? `/api/og?persona=${share.split('_')[0]}&state=${share.split('_')[1]}`
+    : '/api/og';
 
   return {
     title: 'Brain Rot Terminal',
+    description: 'Unleash your brain rot genius. Discover your digital DNA.',
     openGraph: {
       title: 'Brain Rot Terminal Diagnosis',
       images: [{ url: ogImageUrl, width: 1200, height: 630 }],
@@ -33,7 +33,7 @@ export async function generateMetadata(props: {
 export default async function Page(props: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
-  // 在渲染组件前确保参数已解析
-  await props.searchParams;
+  // Next.js 16 必须 await searchParams
+  await props.searchParams; 
   return <QuizClient />;
 }
