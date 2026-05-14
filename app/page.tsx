@@ -1,15 +1,17 @@
 import { Metadata } from 'next';
 import QuizClient from './QuizClient';
 
-export async function generateMetadata({ searchParams }: { searchParams: { share?: string } }): Promise<Metadata> {
+// 适配新版 Next.js：searchParams 现在是 Promise，必须 await
+export async function generateMetadata(props: { 
+  searchParams: Promise<{ share?: string }> 
+}): Promise<Metadata> {
+  const searchParams = await props.searchParams;
   const shareCode = searchParams.share; 
   
-  // 提供一个默认站点的封面图
   let ogImageUrl = 'https://brainrottest.xyz/images/og-image.jpg'; 
   
   if (shareCode) {
     const [persona, state] = shareCode.split('_');
-    // 指向你部署在生产环境的 API 工厂
     ogImageUrl = `https://brainrottest.xyz/api/og?persona=${persona}&state=${state}`;
   }
 
