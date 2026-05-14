@@ -291,7 +291,7 @@ export default function QuizClient() {
 
                 {isUnlocked && (
                   <motion.div className="mt-6 p-4 border-[3px] border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)] bg-[#ccff00] text-black flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
-                     <div className="text-center md:text-left"><h3 className="font-black text-xl mb-1 uppercase">Fuel the Developer ☕</h3><p className="font-mono text-xs font-bold opacity-80 leading-relaxed">为开发者加油☕制作这个想法耗费了我大量的咖啡因。要不要请我喝杯咖啡？</p></div>
+                     <div className="text-center md:text-left"><h3 className="font-black text-xl mb-1 uppercase">Fuel the Developer ☕</h3><p className="font-mono text-xs font-bold opacity-80 leading-relaxed">Creating this idea took endless caffeine. Consider buying me a coffee!</p></div>
                      <a href="https://buymeacoffee.com/kamhowardoops" target="_blank" className="bg-black text-[#ccff00] px-6 py-3 font-black uppercase text-sm border-2 border-black whitespace-nowrap shadow-[4px_4px_0_0_rgba(0,0,0,0.5)] hover:bg-white hover:text-black">Support Dev ↗</a>
                   </motion.div>
                 )}
