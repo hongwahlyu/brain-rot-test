@@ -7,20 +7,13 @@ import { personasData } from "./data/personas";
 
 const SocialIcon = ({ type, className = "w-4 h-4" }: { type: string, className?: string }) => {
   switch (type) {
-    case 'X':
-      return <svg className={className} viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>;
-    case 'FB':
-      return <svg className={className} viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>;
-    case 'REDDIT':
-      return <svg className={className} viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>;
-    case 'IG':
-      return <svg className={className} viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>;
-    case 'TK':
-      return <svg className={className} viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 2.78-1.15 5.54-3.33 7.65-1.92 1.93-4.64 3.06-7.35 3.01-2.91-.01-5.74-1.21-7.72-3.41-1.92-2.07-2.92-4.9-2.84-7.79.03-2.73 1.14-5.38 3.08-7.32 2.03-2.09 4.88-3.27 7.78-3.21v4.06c-1.39-.02-2.78.36-3.95 1.13-1.21.75-2.14 1.95-2.58 3.32-.47 1.4-.41 2.96.2 4.31.62 1.34 1.74 2.45 3.08 3.03 1.39.63 3.01.76 4.49.33 1.45-.41 2.66-1.4 3.39-2.7.7-1.23 1.01-2.67.97-4.1.03-4.78.02-9.56.02-14.34z"/></svg>;
-    case 'COPY':
-      return <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>;
-    default:
-      return null;
+    case 'X': return <svg className={className} viewBox="0 0 24 24" fill="currentColor"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg>;
+    case 'FB': return <svg className={className} viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>;
+    case 'REDDIT': return <svg className={className} viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>;
+    case 'IG': return <svg className={className} viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>;
+    case 'TK': return <svg className={className} viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 2.78-1.15 5.54-3.33 7.65-1.92 1.93-4.64 3.06-7.35 3.01-2.91-.01-5.74-1.21-7.72-3.41-1.92-2.07-2.92-4.9-2.84-7.79.03-2.73 1.14-5.38 3.08-7.32 2.03-2.09 4.88-3.27 7.78-3.21v4.06c-1.39-.02-2.78.36-3.95 1.13-1.21.75-2.14 1.95-2.58 3.32-.47 1.4-.41 2.96.2 4.31.62 1.34 1.74 2.45 3.08 3.03 1.39.63 3.01.76 4.49.33 1.45-.41 2.66-1.4 3.39-2.7.7-1.23 1.01-2.67.97-4.1.03-4.78.02-9.56.02-14.34z"/></svg>;
+    case 'COPY': return <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>;
+    default: return null;
   }
 };
 
@@ -78,14 +71,22 @@ export default function QuizClient() {
     }, 3000); 
   };
 
+  const handlePaymentAndUnlock = () => {
+    // 解锁专属 $1 支付链接
+    window.open('https://www.paypal.com/ncp/payment/7UM3QG9P2NB56', '_blank');
+    setIsVerifying(true);
+    setTimeout(() => {
+      setIsVerifying(false);
+      handleUnlockTransition();
+    }, 3500); 
+  };
+
   const handlePlatformShare = (platform: string, isForUnlock: boolean = false) => {
     const pData = personasData[finalPersona as PersonaCode];
     const state = finalPersona === 'SHT' ? (shtPhase === 2 ? 'final' : shtPhase === 1 ? 'mid' : 'base') : (isUnlocked || isForUnlock ? 'awakened' : 'base');
     const title = (isUnlocked || isForUnlock) ? pData.awakened.title : pData.rot.title;
     
-    // 更新为正确的域名，保证点击跳转无误
     const shareUrl = `https://brain-rot-test-cyan.vercel.app/?share=${finalPersona}_${state}`;
-    // 更新文案：TERMINAL -> TEST
     const shareText = `🧠 BRAIN ROT TEST\nI'm ${finalPersona}! My hidden genius is ${title}!\nDecode your DNA:`;
     const pureCopyText = `I'm ${finalPersona}! My hidden genius is ${title}!\n\n${shareUrl}`;
 
@@ -132,8 +133,7 @@ export default function QuizClient() {
         .animate-violent-shake { animation: violentShake 0.12s infinite; filter: brightness(1.3); box-shadow: 0 0 60px rgba(204, 255, 0, 0.6); }
         @keyframes violentShake { 0%, 100% { transform: translate(0,0); } 25% { transform: translate(-4px,4px); } 75% { transform: translate(4px,-4px); } }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
-        /* 补充故障扫描线 CSS，确保动画完美触发 */
-        .heavy-glitch-overlay { background: repeating-linear-gradient(0deg, rgba(255,0,0,0.15), rgba(255,0,0,0.15) 1px, transparent 1px, transparent 2px); pointer-events: none; }
+        .heavy-glitch-overlay { background: repeating-linear-gradient(0deg, rgba(255, 0, 0, 0.15), rgba(255, 0, 0, 0.15) 1px, transparent 1px, transparent 2px); pointer-events: none; }
       `}</style>
 
       <AnimatePresence>
@@ -152,9 +152,7 @@ export default function QuizClient() {
       <div className="absolute bottom-4 left-4 z-50 font-mono text-[10px] text-[#666] uppercase pointer-events-none">Developed by @kamhowardoops // 2024</div>
       <div className="absolute bottom-4 right-4 z-50"><a href={authorLink} target="_blank" className="font-mono text-[10px] text-[#ccff00] uppercase hover:underline">Follow @kamhowardoops ↗</a></div>
 
-      {/* 故障蒙层：修复 SHT 过渡动画，增加高层级 z-index 和强烈震动类名 */}
-      {isGlitching && <div className="absolute inset-0 z-[200] bg-red-900/40 heavy-glitch-overlay opacity-90 animate-violent-shake" />}
-      
+      {isGlitching && <div className="absolute inset-0 z-[100] bg-red-900/40 heavy-glitch-overlay opacity-90 animate-violent-shake" />}
       {isDecoding && <div className="absolute inset-0 z-[150] pointer-events-none animate-decode-overlay flex items-center justify-center"><h1 className="text-black text-[8vw] font-black italic">OVERRIDING...</h1></div>}
 
       <div className="fixed top-6 right-6 flex justify-end items-center z-[90] pointer-events-none">
@@ -202,7 +200,7 @@ export default function QuizClient() {
         )}
 
         {currentStep === 13 && currentPersona && (
-          <div className="fixed inset-0 z-50 flex flex-col justify-center items-center p-2 md:p-4 pb-16 md:pb-4 pt-16 md:pt-4">
+          <div className="fixed inset-0 z-50 flex flex-col justify-center items-center p-2 md:p-4 pb-16 md:pb-4 pt-16 md:pt-4 overflow-y-auto hide-scrollbar">
             <div className={`absolute inset-0 backdrop-blur-3xl z-0 ${isShtBase || isShtMid ? 'bg-red-900/20' : 'bg-[#1a1814]/90'}`} />
             
             <div className={`absolute inset-0 z-[2] pointer-events-none opacity-10 flex flex-col justify-evenly rotate-[-5deg] scale-125 ${isDecoding ? 'text-[#ccff00]' : 'text-white'}`}>
@@ -225,7 +223,7 @@ export default function QuizClient() {
                           <h3 className="text-2xl font-black uppercase">{isVerifying ? 'VERIFYING...' : 'AWAKENED FORM'}</h3>
                           {isVerifying ? <p className="animate-pulse font-bold bg-black text-[#ccff00] p-4 border-2 border-black">Syncing Signals...</p> : (
                             <>
-                              <button onClick={handleUnlockTransition} className="bg-black text-[#ccff00] font-black py-3 px-6 border-2 border-black hover:bg-[#ccff00] hover:text-black transition-all">Support Dev ($1)</button>
+                              <button onClick={handlePaymentAndUnlock} className="bg-black text-[#ccff00] font-black py-4 px-6 border-2 border-black hover:bg-[#ccff00] hover:text-black transition-all">Unlock Elite Card ($1)</button>
                               {freeShareUsed ? <p className="text-red-600 font-black text-xs uppercase border-2 border-red-600 p-2 bg-red-50">FREE UNLOCK DEPLETED ON THIS DEVICE. PAYMENT REQUIRED.</p> : (
                                 <>
                                   <div className="text-black/40 font-black text-xs uppercase mt-2 mb-2"><span>- OR FREE SHARE -</span></div>
@@ -269,19 +267,19 @@ export default function QuizClient() {
                         {!showPostMenu ? (
                           <button 
                             onClick={() => setShowPostMenu(true)} 
-                            className="w-full border-4 border-black text-black font-black py-3 px-6 uppercase text-base md:text-lg hover:bg-white transition-all shadow-[4px_4px_0_0_rgba(0,0,0,1)]" 
+                            className="w-full border-4 border-black text-black font-black py-4 px-6 uppercase text-base md:text-lg hover:bg-white transition-all shadow-[4px_4px_0_0_rgba(0,0,0,1)]" 
                             style={{ backgroundColor: isShtFinal ? '#D69E2E' : currentPersona.colorHex }}
                           >
                             SHARE RESULT ↗
                           </button>
                         ) : (
                           <div className="grid grid-cols-3 md:flex md:flex-wrap gap-2 w-full">
-                            <button onClick={() => handlePlatformShare('X', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2 border-2 border-white/40 hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="X" className="w-3 h-3 md:w-3.5 md:h-3.5" /><span className="text-[10px] md:text-xs">X</span></button>
-                            <button onClick={() => handlePlatformShare('FB', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2 border-2 border-white/40 hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="FB" className="w-3 h-3 md:w-4 md:h-4" /><span className="text-[10px] md:text-xs">FB</span></button>
-                            <button onClick={() => handlePlatformShare('REDDIT', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2 border-2 border-white/40 hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="REDDIT" className="w-3 h-3 md:w-4 md:h-4" /><span className="text-[9px] md:text-[10px]">Reddit</span></button>
-                            <button onClick={() => handlePlatformShare('IG', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2 border-2 border-white/40 hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="IG" className="w-3 h-3 md:w-3.5 md:h-3.5" /><span className="text-[10px] md:text-xs">IG</span></button>
-                            <button onClick={() => handlePlatformShare('TK', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2 border-2 border-white/40 hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="TK" className="w-3 h-3 md:w-3.5 md:h-3.5" /><span className="text-[10px] md:text-xs">TK</span></button>
-                            <button onClick={() => handlePlatformShare('COPY', false)} className="flex items-center justify-center gap-1.5 text-black font-bold py-2 border-2 border-black hover:bg-white transition-colors flex-1" style={{ backgroundColor: isShtFinal ? '#D69E2E' : currentPersona.colorHex }}><SocialIcon type="COPY" className="w-3 h-3 md:w-4 md:h-4" /><span className="text-[10px] md:text-xs">Copy</span></button>
+                            <button onClick={() => handlePlatformShare('X', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2 border-2 border-white/40 hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="X" /><span className="text-[10px] md:text-xs">X</span></button>
+                            <button onClick={() => handlePlatformShare('FB', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2 border-2 border-white/40 hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="FB" /><span className="text-[10px] md:text-xs">FB</span></button>
+                            <button onClick={() => handlePlatformShare('REDDIT', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2 border-2 border-white/40 hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="REDDIT" /><span className="text-[9px] md:text-[10px]">Reddit</span></button>
+                            <button onClick={() => handlePlatformShare('IG', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2 border-2 border-white/40 hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="IG" /><span className="text-[10px] md:text-xs">IG</span></button>
+                            <button onClick={() => handlePlatformShare('TK', false)} className="flex items-center justify-center gap-1.5 bg-black text-white font-bold py-2 border-2 border-white/40 hover:bg-white hover:text-black transition-colors flex-1"><SocialIcon type="TK" /><span className="text-[10px] md:text-xs">TK</span></button>
+                            <button onClick={() => handlePlatformShare('COPY', false)} className="flex items-center justify-center gap-1.5 text-black font-bold py-2 border-2 border-black hover:bg-white transition-colors flex-1" style={{ backgroundColor: isShtFinal ? '#D69E2E' : currentPersona.colorHex }}><SocialIcon type="COPY" /><span className="text-[10px] md:text-xs">Copy</span></button>
                           </div>
                         )}
                       </div>
@@ -290,15 +288,15 @@ export default function QuizClient() {
                 </motion.div>
 
                 {isUnlocked && (
-                  <motion.div className="mt-6 p-4 border-[3px] border-black shadow-[4px_4px_0_0_rgba(0,0,0,1)] bg-[#ccff00] text-black flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
-                     <div className="text-center md:text-left"><h3 className="font-black text-xl mb-1 uppercase">Fuel the Developer ☕</h3><p className="font-mono text-xs font-bold opacity-80 leading-relaxed">Creating this idea took endless caffeine. Consider buying me a coffee!</p></div>
-                     <a href="https://buymeacoffee.com/kamhowardoops" target="_blank" className="bg-black text-[#ccff00] px-6 py-3 font-black uppercase text-sm border-2 border-black whitespace-nowrap shadow-[4px_4px_0_0_rgba(0,0,0,0.5)] hover:bg-white hover:text-black">Support Dev ↗</a>
+                  <motion.div className="mt-8 p-6 border-[3px] border-black shadow-[6px_6px_0_0_rgba(0,0,0,1)] bg-[#ccff00] text-black flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+                     <div className="text-center md:text-left"><h3 className="font-black text-xl mb-1 uppercase">Fuel the Developer ☕</h3><p className="font-mono text-xs font-bold opacity-80 leading-relaxed">为开发者加油☕制作这个想法耗费了我大量的咖啡因。要不要请我喝杯咖啡？</p></div>
+                     <a href="https://www.paypal.com/ncp/payment/QGS2WYGF8V27S" target="_blank" className="bg-black text-[#ccff00] px-6 py-3 font-black uppercase text-base border-2 border-black whitespace-nowrap shadow-[4px_4px_0_0_rgba(0,0,0,0.5)] hover:bg-white hover:text-black hover:translate-y-1 hover:shadow-[2px_2px_0_0_rgba(0,0,0,0.5)] transition-all">Support Dev ↗</a>
                   </motion.div>
                 )}
               </motion.div>
             </div>
             
-            <div className="mt-4 relative z-20 pb-8">
+            <div className="mt-8 relative z-20 pb-16">
               {finalPersona === 'SHT' ? (
                 shtPhase === 0 ? <button onClick={handleShtMidTransition} className="bg-red-600 text-white font-black px-12 py-5 shadow-[6px_6px_0_0_rgba(255,0,0,0.4)] transition-all uppercase hover:bg-black hover:text-red-600 hover:translate-y-1">DECODE THIS MESS</button> 
                 : (shtPhase === 1 && !isAwakened) ? <button onClick={() => setIsAwakened(true)} className="bg-white text-red-600 border-4 border-red-600 font-black px-12 py-5 uppercase hover:bg-red-600 hover:text-white transition-all shadow-[6px_6px_0_0_rgba(255,255,255,0.2)]">Actually, I have value.</button> 
